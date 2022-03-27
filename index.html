@@ -32,5 +32,38 @@
                     <script src="./font.js">
                     </script>
                     <script src="./main.js"></script> 
+          <audio
+    id="music"
+    class="music"
+    src="assets/radio.mp3"
+    autoplay
+    loop
+    onplaying=""
+    style="display: none"
+  ></audio>
+  <script>
+    document.getElementById("music").pause();
+    document.getElementById("hidden").style = "opacity: 0; transition: 2s;";
+
+    document.addEventListener("mousedown", handleMouseDown);
+
+    function handleMouseDown() {
+      document.getElementById("music").play();
+      document.getElementById("preload").style =
+        "opacity: 0; transition: 0.6s;";
+
+      document.getElementById("hidden").style = "opacity: 1; transition: 2s;";
+
+      var rythm = new Rythm();
+      rythm.addRythm("blur1", "blur", 0, 250);
+      rythm.addRythm("bass", "pulse", 130, 200);
+      rythm.connectExternalAudioElement(document.getElementById("music"));
+      rythm.setGain(0.07);
+      rythm.start();
+      document.getElementById("music").play();
+      document.removeEventListener("mousedown", handleMouseDown);
+    }
+    
+  </script>
             </body>
         </html>
